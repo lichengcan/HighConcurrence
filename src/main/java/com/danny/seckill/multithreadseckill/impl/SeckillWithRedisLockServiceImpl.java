@@ -38,13 +38,14 @@ public class SeckillWithRedisLockServiceImpl implements SeckillWithRedisLockServ
         Jedis jedis = jedisPool.getResource();
 
         try {
-            int expireTime = 1000;
-            final String set = jedis.set("key", "clientId", "NX", "EX", expireTime);
-            if (set.equals("OK")) {
-                System.out.println("获取到了锁");
-            }else {
-                System.out.println("xxxxx");
-            }
+//            int expireTime = 1000;
+//            final String set = jedis.set("key", "clientId", "NX", "EX", expireTime);
+//            if (set.equals("OK")) {
+//                System.out.println("获取到了锁");
+//            }else {
+//                System.out.println("xxxxx");
+//            }
+
             if(jedis.decr("flag").intValue()>-1) {
                 /* 1、查询秒杀商品剩余数量*/
                 SeckillItem seckillItem = seckillItemMapper.selectByPrimaryKey(seckillItemId);
